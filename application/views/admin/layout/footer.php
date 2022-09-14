@@ -1,3 +1,7 @@
+<script>
+  initSample();
+</script>
+
 </div>
             <!-- /.box-body -->
           </div>

@@ -1,4 +1,10 @@
 <?php
+//notif upload error
+if(isset($error)){
+    echo '<div class="alert alert-warning">';
+    echo $error;
+    echo '</div>';
+}
 //notif error
 echo validation_errors('<div class="alert alert-danger">', '</div>');
 
@@ -64,14 +70,14 @@ echo form_open_multipart(base_url('admin/produk/tambah'),' class="form-horizonta
 <div class="form-group">
     <label class="col-md-2 control-label">Keterangan Produk</label>
     <div class="col-md-10">
-        <textarea name="keterangan" id="" cols="30" rows="10" class="form-control"><?php echo set_value('keterangan') ?></textarea>
+        <textarea name="keterangan" class="form-control" id="editor"><?php echo set_value('keterangan') ?></textarea>
     </div>
 </div>
 
 <div class="form-group">
     <label class="col-md-2 control-label">Keywords Produk</label>
     <div class="col-md-10">
-        <textarea name="keywords" id="" cols="30" rows="10" class="form-control"><?php echo set_value('keywords') ?></textarea>
+        <textarea name="keywords" class="form-control"><?php echo set_value('keywords') ?></textarea>
     </div>
 </div>
 

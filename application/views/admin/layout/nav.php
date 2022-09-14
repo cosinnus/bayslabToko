@@ -36,6 +36,21 @@
             <li><a href="<?php echo base_url('admin/user/tambah') ?>"><i class="fa fa-circle-o"></i> Tambah User</a></li>
           </ul>
         </li>
+
+         <!-- menu konfig -->
+         <li class="treeview">
+          <a href="#">
+            <i class="fa fa-cog"></i> <span>Konfig</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="<?php echo base_url('admin/konfigurasi') ?>"><i class="fa fa-circle-o"></i> Data Web</a></li>
+            <li><a href="<?php echo base_url('admin/konfigurasi/logo') ?>"><i class="fa fa-circle-o"></i> Konfig Logo</a></li>
+            <li><a href="<?php echo base_url('admin/konfigurasi/icon') ?>"><i class="fa fa-circle-o"></i> Konfig Icon</a></li>
+          </ul>
+        </li>
         
       </ul>
     </section>

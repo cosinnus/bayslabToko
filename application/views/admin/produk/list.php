@@ -33,9 +33,10 @@
                 <img src="<?php echo base_url('assets/upload/image/thumbs/'.$produk->gambar) ?>" alt="" class="img img-responsive img-thumbnail" width="60">
             </td>
             <td>
+                <a href="<?php echo base_url('admin/produk/gambar/'.$produk->id_produk) ?>" class="btn btn-warning btn-xs"><i class="fa fa-image"></i> Gambar (<?php echo $produk->total_gambar ?>)</a>
                 <a href="<?php echo base_url('admin/produk/edit/'.$produk->id_produk) ?>" class="btn btn-warning btn-xs"><i class="fa fa-retweet"></i> Edit</a>
 
-                <a href="<?php echo base_url('admin/produk/delete/'.$produk->id_produk) ?>" class="btn btn-danger btn-xs" onclick="return confirm('Yakin nih !!')"><i class="fa fa-trash-o"></i> Delete</a>
+                <?php include('delete.php') ?>
             </td>
         </tr>
         <?php $no++; } ?>
