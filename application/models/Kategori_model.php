@@ -20,12 +20,23 @@ class Kategori_model extends CI_Model
         return $query->result();
     }
     
-    //untuk menampilkan detail data user
+    //untuk menampilkan detail data kategori
     public function detail($id_kategori)
     {
         $this->db->select('*');
         $this->db->from('kategori');
         $this->db->where('id_kategori', $id_kategori);
+        $this->db->order_by('id_kategori', 'DESC');
+        $query = $this->db->get();
+        return $query->row();
+    }
+
+	//untuk menampilkan detail data kategori
+    public function read($slug_kategori)
+    {
+        $this->db->select('*');
+        $this->db->from('kategori');
+        $this->db->where('slug_kategori', $slug_kategori);
         $this->db->order_by('id_kategori', 'DESC');
         $query = $this->db->get();
         return $query->row();

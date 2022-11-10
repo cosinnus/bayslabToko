@@ -9,6 +9,7 @@ class Belanja extends CI_Controller {
         $this->load->model('produk_model');
         $this->load->model('kategori_model');
         $this->load->model('konfigurasi_model');
+		$this->load->model('pelanggan_model');
     }
 
     //halaman untuk belanja
@@ -22,6 +23,30 @@ class Belanja extends CI_Controller {
                     );
                     $this->load->view('layout/wrapper', $data, FALSE);
     }
+
+	//untuk checkout
+	public function checkout()
+	{
+		//untuk cek user login atau tidak
+		if($this->session->userdata('email')){
+			$email = $this->session->userdata('email');
+			$nama_pelanggan = $this->session->userdata('nama_pelanggan');
+			$pelanggan = $this->pelanggan_model->sudah_login($email, $nama_pelanggan);
+
+			$keranjang = $this->cart->contents();
+
+			$data = array( 	'title' 	=> 'Checkout Belanja Anda',
+							'keranjang' => $keranjang,
+							'pelanggan' => $pelanggan,
+							'isi' 		=> 'belanja/checkout'
+						);
+						$this->load->view('layout/wrapper', $data, FALSE);
+		} else {
+			//jika belum login makan ada notif seperti ini
+			$this->session->set_flashdata('sukses', 'Silakan login atau register dulu !!');
+			redirect(base_url('registrasi'),'refresh');
+		}
+	}
 
     //tambah ke keranjang belanja
     public function add()
@@ -43,6 +68,41 @@ class Belanja extends CI_Controller {
         $this->cart->insert($data);
         redirect($redirect_page,'refresh');
     }
+
+	//untuk update cart
+	public function update_cart($rowid)
+	{
+		//jika ada data
+		if($rowid){
+			$data = array( 'rowid' => $rowid,
+						   'qty' => $this->input->post('qty')	
+						);
+						$this->cart->update($data);
+						$this->session->set_flashdata('sukses', 'Data has been updated');
+						redirect(base_url('belanja'), 'refresh');
+		} else {
+			//jika tidak ada rowid
+
+			redirect(base_url('belanja'), 'refresh');
+		}
+	}
+
+	//untuk hapus semua data belanja di keranjang
+	public function hapus($rowid='')
+	{	
+		if($rowid){
+			//kode hapus per item
+			$this->cart->remove($rowid);
+			$this->session->set_flashdata('sukses', 'Data keranjang belanja sudah dihapus');
+			redirect(base_url('belanja'), 'refresh');
+		} else {
+			//kode untuk hapus semua
+			$this->cart->destroy();
+			$this->session->set_flashdata('sukses', 'Seluruh data keranjang belanja sudah dihapus');
+			redirect(base_url('belanja'), 'refresh');
+		}
+		
+	}
 }
 
 /* End of file Belanja.php and path \application\controllers\Belanja.php */

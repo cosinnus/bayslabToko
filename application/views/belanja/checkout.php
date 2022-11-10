@@ -75,10 +75,36 @@
                     </tr>
                 </table>
 				<br>
-				<p class="pull-right">
-					<a href="<?php echo base_url('belanja/hapus') ?>" class="btn btn-danger btn-sm btn-flat"><i class="fa fa-trash-o"></i> Clear your basket</a>
-					<a href="<?php echo base_url('belanja/checkout') ?>" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-shopping-cart"></i> Checkout</a>
-				</p>
+				<?php echo form_open(base_url('belanja/checkout')); ?>
+					<table class="table table-bordered table-hover">
+						<thead>
+							<tr>
+								<th>Nama Penerima</th>
+								<th><input type="text" name="nama_pelanggan" class="form-control" placeholder="Nama Lengkap" required value="<?php echo $pelanggan->nama_pelanggan ?>"></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>Email Penerima</td>
+								<td><input type="email" name="email" class="form-control" placeholder="Email" required value="<?php echo $pelanggan->email ?>"></td>
+							</tr>
+							<tr>
+								<td>Telepon</td>
+								<td><input type="text" name="telepon" class="form-control" placeholder="Telp" required value="<?php echo $pelanggan->telepon ?>"></td>
+							</tr>
+							<tr>
+								<td>Alamat Penerima</td>
+								<td><textarea name="alamat" cols="30" rows="10" class="form-control" placeholder="Alamat"><?php echo $pelanggan->alamat ?></textarea></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td><button class="btn btn-sm btn-success" type="submit"><i class="fa fa-save"> Oke Checkout</i></button>
+								<button class="btn btn-sm btn-danger" type="reset"><i class="fa fa-retweet"> Repeat</i></button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				<?php echo form_close(); ?>
             </div>
         </div>
 
@@ -92,7 +118,5 @@
                 
             </div>
         </div>
-
-        
     </div>
 </section>
